@@ -1,14 +1,29 @@
+"use client"
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
 export default function Navbar() {
-    return (
-        <div>
-            <ul className="flex justify-center space-x-4 my-4">
-                <Link href="/"><li>Home</li></Link>
-                <Link href="/about"><li>About</li></Link>
-                <Link href="/services"><li>Services</li></Link>
-            </ul>
-        </div>
-    )
+
+    const pathName = usePathname()
+    console.log(pathName.includes("dashboard"));
+
+    if(!pathName.includes("dashboard")){
+        return (
+            <div>
+                <ul className="flex justify-center space-x-4 my-4">
+                    <Link href="/"><li>Home</li></Link>
+                    <Link href="/about"><li>About</li></Link>
+                    <Link href="/services"><li>Services</li></Link>
+                </ul>
+            </div>
+        )
+    }
+
+    else{
+        return " "
+    }
+
+
+    
 }
