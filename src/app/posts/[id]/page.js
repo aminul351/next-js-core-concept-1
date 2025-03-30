@@ -7,7 +7,6 @@ const getPostDetails = async(post_id) => {
 export default async function PostDetails({params}) {
 
     const id = await params.id;
-    // console.log(post,"hi");
     const postDetails = await getPostDetails(id)
     console.log(postDetails);
 
