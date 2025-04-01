@@ -18,9 +18,7 @@ export async function generateMetadata({ params }){
     }
   }
 export default async function PostDetails({params}) {
-
     
-
     const id = await params.id;
     const postDetails = await getPostDetails(id)
     console.log(postDetails);
