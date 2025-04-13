@@ -1,6 +1,8 @@
 import dbConnect from "@/app/lib/dbConnect";
 import { ObjectId } from "mongodb";
 
+
+// single specific  data 
 export async function GET(req, { params }) {
 
     const id = await params;
@@ -9,6 +11,7 @@ export async function GET(req, { params }) {
 }
 
 
+// delete 
 export async function DELETE(req, {params}) {
 
     const id = await params;
@@ -20,11 +23,11 @@ export async function DELETE(req, {params}) {
 }
 
 
+
+// update 
 export async function PATCH(req, { params }) {
 
     const id = await params;
-    // console.log(id);
-
     const postedData = await req.json()
     const filter = { _id: new ObjectId(id) }
     const updatedResponse = await dbConnect("topics").updateOne(filter,
