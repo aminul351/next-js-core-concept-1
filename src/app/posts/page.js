@@ -18,6 +18,9 @@ const roboto = Roboto({
 })
 
 export default async function PostPage() {
+  // const data = await fetch('https://jsonplaceholder.typicode.com/posts')
+  // const posts = await data.json();
+  // return posts;
     const posts = await getPosts()
     return (
       <ul>
