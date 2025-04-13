@@ -1,19 +1,10 @@
-export const dynamic = 'force-static'
- 
+import dbConnect from "@/app/lib/dbConnect"
+
 export async function GET() {
-//   const res = await fetch('https://data.mongodb-api.com/...', {
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'API-Key': process.env.DATA_API_KEY,
-//     },
-//   })
-//   const data = await res.json()
-  const data = {
-    message : "successful",
-    status : 200
-  }
+
+  const data = await dbConnect("topics").find({}).toArray()
  
-  return Response.json({ data })
+  return Response.json(data )
 }
 
 
@@ -21,7 +12,8 @@ export async function GET() {
 export async function POST(req) {
    
     const postedData = await  req.json()
+    const result = await dbConnect("topics").insertOne(postedData)
      
-      return Response.json({ postedData })
+      return Response.json(result)
     }
     

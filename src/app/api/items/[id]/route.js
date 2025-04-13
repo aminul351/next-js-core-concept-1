@@ -1,26 +1,39 @@
-export async function GET(req, params) {
+import dbConnect from "@/app/lib/dbConnect";
+import { ObjectId } from "mongodb";
 
-      const id = await params;
-      console.log(id);
-     
-      return Response.json({ id })
-    }
-    
+export async function GET(req, { params }) {
 
-    export async function DELETE(req, params) {
+    const id = await params;
+    const singleData = await dbConnect("topics").findOne({ _id: new ObjectId(id) })
+    return Response.json(singleData)
+}
 
-        const id = await params;
-        console.log(id);
-       
-        return Response.json({ id })
-      }
-    
-      
-      export async function PATCH(req, params) {
 
-        const id = await params;
-        console.log(id);
-       
-        return Response.json({ id })
-      }
-      
+export async function DELETE(req, {params}) {
+
+    const id = await params;
+    console.log(id);
+
+    const deletedData = await dbConnect("topics").deleteOne({ _id: new ObjectId(id) })
+
+    return Response.json(deletedData)
+}
+
+
+export async function PATCH(req, { params }) {
+
+    const id = await params;
+    // console.log(id);
+
+    const postedData = await req.json()
+    const filter = { _id: new ObjectId(id) }
+    const updatedResponse = await dbConnect("topics").updateOne(filter,
+        {
+          $set : {...postedData}
+        },
+
+        { upsert : true }
+    )
+
+    return Response.json(updatedResponse)
+}
